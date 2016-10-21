@@ -9,10 +9,37 @@
 // });
 
 
+// todo:: daily/0.0.1 可以自己获取
+
+// push -origin daily/0.0.1 -msg ‘xx’
+// push -o daily/0.0.1 -m ‘xx’
 
 require('shelljs/global');
 
-var argv = require('yargs').argv;
+var argv = require('yargs')
+  .command("morning", "good morning", function (yargs) {
+      console.log("Good Morning");
+    })
+  .option('o', {
+    alias : 'origin',
+    demand: false,
+    // default: 'tom',
+    describe: '分支',
+    type: 'string'
+  })
+  .option('m', {
+    alias : 'msg',
+    demand: false,
+    default: 'update',
+    describe: '提交信息',
+    type: 'string'
+  })
+  .usage('Usage: push -o [options] -m [options]')
+  .example('push -o daily/0.0.1 -m "update"')
+  .help('h')
+  .alias('h', 'help')
+  .argv;
+
 
 if (!which('git')) {
   echo('Sorry, this script requires git');
