@@ -38,7 +38,7 @@ if (exec('git commit -am "' + argv.m + '"').code !== 0) {
   echo('Error: Git commit failed');
   exit(1);
 }
-obj.stop()
+spinner.stop()
 echo('pushing...');
 if (exec('git push origin ' + branch).code !== 0) {
   echo('Error: Git push failed');
