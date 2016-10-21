@@ -8,13 +8,6 @@ require('shelljs/global');
 var fs = require('fs');
 
 var argv = require('yargs')
-  // .option('o', {
-  //   alias : 'origin',
-  //   demand: false,
-  //   // default: 'tom',
-  //   describe: '分支',
-  //   type: 'string'
-  // })
   .option('m', {
     alias : 'msg',
     demand: false,
