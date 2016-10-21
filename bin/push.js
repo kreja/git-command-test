@@ -20,27 +20,29 @@ var argv = require('yargs')
   .help('h')
   .alias('h', 'help')
   .argv;
-
 var branch = getBranch();
 
-echo('Error: Git push failed', 'test');
 
 if (!which('git')) {
   echo('Sorry, this script requires git');
   exit(1);
 }
+echo('adding...');
 if (exec('git add .').code !== 0) {
   echo('Error: Git add failed');
   exit(1);
 }
+echo('committing...');
 if (exec('git commit -am "' + argv.m + '"').code !== 0) {
   echo('Error: Git commit failed');
   exit(1);
 }
+echo('pushing...');
 if (exec('git push origin ' + branch).code !== 0) {
   echo('Error: Git push failed');
   exit(1);
 }
+echo('DONE!');
 
 function getBranch(){
 	var branch = '';
