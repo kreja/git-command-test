@@ -19,10 +19,6 @@ var argv = require('yargs')
   .argv;
 var branch = getBranch();
 
-var spinner = new Spinner('processing.. %s');
-spinner.setSpinnerString('|/-\\');
-spinner.start();
-
 
 if (!which('git')) {
   echo('Sorry, this script requires git');
@@ -39,12 +35,15 @@ if (exec('git commit -am "' + argv.m + '"').code !== 0) {
   exit(1);
 }
 echo('pushing...');
+var spinner = new Spinner('processing.. %s');
+spinner.setSpinnerString('|/-\\');
+spinner.start();
 if (exec('git push origin ' + branch).code !== 0) {
   echo('Error: Git push failed');
   exit(1);
 }
+spinner.stop();
 echo('=========== DONE! ===========');
-spinner.stop()
 
 function getBranch(){
 	var branch = '';
