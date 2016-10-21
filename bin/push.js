@@ -41,7 +41,7 @@ if (exec('git push origin ' + branch).code !== 0) {
   echo('Error: Git push failed');
   exit(1);
 }
-spinner.stop();
+// spinner.stop();
 echo('=========== DONE! ===========');
 
 function getBranch(){
