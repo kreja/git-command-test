@@ -1,11 +1,8 @@
 #!/usr/bin/env node
 
-
-// push -origin daily/0.0.1 -msg ‘xx’
-// push -o daily/0.0.1 -m ‘xx’
-
 require('shelljs/global');
 var fs = require('fs');
+var Spinner = require('cli-spinner').Spinner;
 
 var argv = require('yargs')
   .option('m', {
@@ -22,6 +19,10 @@ var argv = require('yargs')
   .argv;
 var branch = getBranch();
 
+var spinner = new Spinner('processing.. %s');
+spinner.setSpinnerString('|/-\\');
+spinner.start();
+
 
 if (!which('git')) {
   echo('Sorry, this script requires git');
@@ -37,12 +38,13 @@ if (exec('git commit -am "' + argv.m + '"').code !== 0) {
   echo('Error: Git commit failed');
   exit(1);
 }
+obj.stop()
 echo('pushing...');
 if (exec('git push origin ' + branch).code !== 0) {
   echo('Error: Git push failed');
   exit(1);
 }
-echo('DONE!');
+echo('=========== DONE! ===========');
 
 function getBranch(){
 	var branch = '';
